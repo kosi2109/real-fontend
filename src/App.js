@@ -10,14 +10,12 @@ import Detail from "./components/pages/detail";
 function App() {
   return (
     <Router>
-      <React.StrictMode>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={index} />
-          <Route exact path="/phone_&_tablet" component={Phone} />
-          <Route exact path="/detail/product" component={Detail} />
-        </Switch>
-      </React.StrictMode>
+      <Header />
+      <Switch>
+        <Route exact path="/" component={index} />
+        <Route exact path="/brand/:br_slug" component={Phone} />
+        <Route exact path="/detail/:ph_slug" component={Detail} />
+      </Switch>
     </Router>
   );
 }

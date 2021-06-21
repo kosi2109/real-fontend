@@ -9,6 +9,7 @@ function Dropdown({ title, items }) {
   Dropdown.handleClickOutside = () => {
     setOpen(false);
   };
+
   return (
     <li
       tabIndex={0}
@@ -17,17 +18,17 @@ function Dropdown({ title, items }) {
       onClick={() => toggle(!open)}
       className="dropdown-title"
     >
-      {title}{" "}
+      {title}
       {open ? (
-        <i class="fas fa-caret-up"></i>
+        <i className="fas fa-caret-up"></i>
       ) : (
-        <i class="fas fa-caret-down"></i>
+        <i className="fas fa-caret-down"></i>
       )}
       {open && (
         <ul className="dropdown-content">
           {items.map((item) => (
-            <li key={item.id}>
-              <a href="#">{item.name}</a>
+            <li key={item.id} className="p-1">
+              <a href={"/brand/" + item.br_slug}>{item.br_name}</a>
             </li>
           ))}
         </ul>

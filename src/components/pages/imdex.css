@@ -109,7 +109,9 @@
   border-bottom: 2px solid #ffcc01;
   width: 15%;
 }
-
+.dropdown button {
+  width: 350px !important;
+}
 @media screen and (max-width: 1200px) {
   .img {
     width: 80%;
@@ -175,6 +177,11 @@
   .item-img {
     width: 200px;
     height: 200px;
+  }
+  .dropdown button {
+    width: 300px !important;
+
+    outline: none;
   }
 }
 
