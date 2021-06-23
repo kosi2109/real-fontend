@@ -11,10 +11,10 @@ export default function index() {
   return (
     <div className="container-fluid p-0 overflow-hidden">
       <div className="row mt-lg-4 p-3">
-        <div className="col-lg-6 col-md-6 col-sm-12 mb-sm-3 mt-5 d-flex flex-column justify-content-center align-items-center">
+        <div className="col-lg-6 col-md-6 col-sm-12 mb-sm-3 mt-5 ">
           <Carousel
             autoPlay={true}
-            width="90%"
+            width="100%"
             infiniteLoop={true}
             showArrows={false}
             showStatus={false}
