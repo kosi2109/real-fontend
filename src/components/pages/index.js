@@ -9,9 +9,9 @@ import { Carousel } from "react-responsive-carousel";
 
 export default function index() {
   return (
-    <div className="container-fluid p-0 overflow-hidden">
-      <div className="row mt-lg-4 p-3">
-        <div className="col-lg-6 col-md-6 col-sm-12 mb-sm-3 mt-5 ">
+    <div className="container-fluid p-0 overflow-hidden hero">
+      <div className="row p-3">
+        <div className="col-lg-6 col-md-6 col-sm-12 mb-sm-3">
           <Carousel
             autoPlay={true}
             width="100%"
@@ -33,7 +33,7 @@ export default function index() {
             </div>
           </Carousel>
         </div>
-        <div className="col-lg-6 col-md-6 col-sm-12 text-center mt-lg-5 mt-sm-2 d-flex flex-column justify-content-center align-items-center">
+        <div className="col-lg-6 col-md-6 col-sm-12 text-center d-flex flex-column justify-content-center align-items-center">
           <h1 className="mb-3 welcome">Welcome to Real Mobile</h1>
           <div>
             <p>

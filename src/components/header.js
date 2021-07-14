@@ -106,7 +106,7 @@ export default function Header() {
         <Dropdown title="Brand" items={items} />
 
         <li>
-          <a href="#">Acceries & Gudgets</a>
+          <Link to="/accessories&gudgets">Accessory</Link>
         </li>
       </ul>
       <div onClick={() => navAvtive()} className="burger">

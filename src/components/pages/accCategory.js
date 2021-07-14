@@ -1,57 +1,61 @@
-import React, { useEffect, useState } from "react";
-import "./imdex.css";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "./imdex.css";
 import LoadingCom from "../fetchLoading";
 import { Dropdown } from "react-bootstrap";
 
-export default function Phone() {
-  const [phones, setPhones] = useState([]);
-  const [category, setCategory] = useState([]);
-  const [select, setSelect] = useState();
+export default function AccCategory() {
+  const { ct_slug } = useParams();
   const [loading, setLoading] = useState(false);
-  const { br_slug } = useParams();
-
-  const fetchPhone = async () => {
-    const ph = await axios
-      .get("http://127.0.0.1:8000/api/brand/" + br_slug)
-      .then((res) => setPhones(res.data))
+  const [items, setItems] = useState([]);
+  const [brand, setBrand] = useState([]);
+  const [select, setSelect] = useState();
+  const [cate, setCate] = useState("");
+  const fetchItem = async () => {
+    const it = await axios
+      .get(`http://127.0.0.01:8000/api/` + ct_slug + `/accessory/`)
+      .then((res) => setItems(res.data))
       .catch((err) => console.log(err));
-    const ct = await axios
-      .get("http://127.0.0.1:8000/api/category/" + br_slug)
-      .then((res) => setCategory(res.data))
+
+    const br = await axios
+      .get(`http://127.0.0.01:8000/api/accessory/` + ct_slug + `/brands/`)
+      .then((res) => setBrand(res.data))
+      .catch((err) => console.log(err));
+    const category = await axios
+      .get(`http://127.0.0.01:8000/api/accessory/categories/` + ct_slug)
+      .then((res) => setCate(res.data.ct_name))
       .catch((err) => console.log(err));
     setLoading(true);
   };
-
   useEffect(() => {
-    fetchPhone();
+    fetchItem();
   }, []);
-
   if (select) {
-    var newArray = phones.filter(function (el) {
-      return el.category === select;
+    var newArray = items.filter(function (el) {
+      return el.brand === select;
     });
   }
   if (!select) {
-    var newArray = phones.map(function (el) {
+    var newArray = items.map(function (el) {
       return el;
     });
   }
 
-  var ctName = category.filter((el) => {
+  var ctName = brand.filter((el) => {
     if (el.id === select) {
-      return el.ct_name;
+      return el.br_name;
     }
   });
-  var cname = ctName.map((e) => e.ct_name);
+  var cname = ctName.map((e) => e.br_name);
+
   const App = () => {
     return (
       <>
         <div className="row mt-md-5 p-4">
           <div className="col-lg-6 mb-3 d-flex align-items-center justify-content-center">
             <h1 className="text-white p-0 m-0 brand text-center text-uppercase">
-              {br_slug}
+              {cate}
             </h1>
           </div>
           <div className="col-lg-6 d-flex align-items-center justify-content-center">
@@ -64,42 +68,37 @@ export default function Phone() {
                 <Dropdown.Item as="button" onClick={() => setSelect(0)}>
                   All
                 </Dropdown.Item>
-                {category.map((cat) => (
+                {brand.map((cat) => (
                   <Dropdown.Item
                     as="button"
                     onClick={() => setSelect(cat.id)}
                     key={cat.id}
                   >
-                    {cat.ct_name}
+                    {cat.br_name}
                   </Dropdown.Item>
                 ))}
               </Dropdown.Menu>
             </Dropdown>
           </div>
         </div>
-        <div className="row px-md-5 row-container">
-          {newArray.map((phone) => (
+        <div className="row row-container px-lg-5">
+          {newArray.map((item) => (
             <div
               className="col-lg-3 col-md-4 col-sm-6 col-xs-12  mb-4"
-              key={phone.id}
+              key={item.id}
             >
-              <div className="item-container shadow">
+              <div className="category shadow">
                 <div className="item-img">
                   <img
-                    src={`http://127.0.0.01:8000` + phone.cover_img}
+                    src={`http://127.0.0.01:8000` + item.cover_img}
                     alt="som"
                   />
                 </div>
                 <div className="item-content">
-                  <h4 className="text-start">{phone.ph_name}</h4>
-                  <h5 className="text-end">
-                    <a
-                      className="text-secondary"
-                      href={`/detail/` + phone.ph_slug}
-                    >
-                      View
-                    </a>
-                  </h5>
+                  <h6 className="text-start">
+                    {item.acc_name.substring(0, 25)}
+                  </h6>
+                  <h5 className="text-start">{item.price} Ks</h5>
                 </div>
               </div>
             </div>
@@ -108,7 +107,6 @@ export default function Phone() {
       </>
     );
   };
-
   return (
     <div className="container-fluid hero">
       {loading ? <App /> : <LoadingCom />}

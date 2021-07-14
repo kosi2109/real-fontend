@@ -46,8 +46,8 @@ export default function Detail() {
   const App = () => {
     return (
       <>
-        <div className="row p-4">
-          <div className="col-md-6 ">
+        <div className="row  py-4 p-md-4 mt-md-5">
+          <div className="col-md-6">
             <Carousel autoPlay={false} showStatus={false}>
               <div className="img-container">
                 <img
@@ -62,7 +62,7 @@ export default function Detail() {
               ))}
             </Carousel>
           </div>
-          <div className="col-md-6  bg-light shadow detail ">
+          <div className="col-md-6  bg-light shadow detail mt-md-3 ">
             <h1 className="text-center p-2">
               <i>{phone.ph_name}</i>
             </h1>
@@ -136,7 +136,7 @@ export default function Detail() {
   };
 
   return (
-    <div className="container-fluid mt-5 ">
+    <div className="container-fluid hero ">
       {loading ? <App /> : <LoadingCom />}
     </div>
   );
